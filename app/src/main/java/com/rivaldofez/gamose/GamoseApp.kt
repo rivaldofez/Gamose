@@ -12,12 +12,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.rivaldofez.gamose.ui.navigation.NavigationItem
 import com.rivaldofez.gamose.ui.navigation.Screen
+import com.rivaldofez.gamose.ui.screen.DetailScreen
 import com.rivaldofez.gamose.ui.screen.FavoriteScreen
 import com.rivaldofez.gamose.ui.screen.HomeScreen
 import com.rivaldofez.gamose.ui.screen.ProfileScreen
@@ -46,7 +49,9 @@ fun GamoseApp(
             modifier = Modifier.padding(innerPadding)
         ){
             composable(Screen.Home.route) {
-                HomeScreen()
+                HomeScreen(navigateToDetail = { gameId ->
+                    navController.navigate(Screen.DetailGame.createRoute(gameId))
+                })
             }
 
             composable(Screen.Favorite.route) {
@@ -55,6 +60,19 @@ fun GamoseApp(
 
             composable(Screen.Profile.route) {
                 ProfileScreen()
+            }
+
+            composable(
+                route = Screen.DetailGame.route,
+                arguments = listOf(navArgument("gameId") { type = NavType.IntType}),
+            ) {
+                val id = it.arguments?.getInt("gameId") ?: 0
+                DetailScreen(
+                    gameId = id,
+                    navigateBack = {
+                        navController.navigateUp()
+                    }
+                )
             }
         }
     }

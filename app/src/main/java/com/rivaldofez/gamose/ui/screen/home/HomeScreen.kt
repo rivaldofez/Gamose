@@ -1,5 +1,6 @@
 package com.rivaldofez.gamose.ui.screen
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -24,7 +25,8 @@ fun HomeScreen(
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = viewModel(
         factory = ViewModelFactory(Injection.provideRepository())
-    )
+    ),
+    navigateToDetail: (Int) -> Unit,
 ) {
     viewModel.uiState.collectAsState(initial = UiState.Loading).value.let { uiState ->
         when (uiState){
@@ -32,7 +34,7 @@ fun HomeScreen(
                 viewModel.getGames()
             }
             is UiState.Success -> {
-                HomeContent(games = uiState.data, modifier = modifier)
+                HomeContent(games = uiState.data, modifier = modifier, navigateToDetail = navigateToDetail)
             }
             is UiState.Error -> {}
         }
@@ -44,6 +46,7 @@ fun HomeScreen(
 fun HomeContent(
     games: List<Game>,
     modifier: Modifier = Modifier,
+    navigateToDetail: (Int) -> Unit
 ) {
     LazyVerticalGrid(
         columns = GridCells.Adaptive(160.dp),
@@ -53,7 +56,9 @@ fun HomeContent(
         modifier = modifier
     ) {
         items(games) {
-            GameItem(image = it.thumbnail, title = it.title, genre = it.genre)
+            GameItem(image = it.thumbnail, title = it.title, genre = it.genre, modifier = Modifier.clickable{
+                navigateToDetail(it.id)
+            })
         }
     }
 }
