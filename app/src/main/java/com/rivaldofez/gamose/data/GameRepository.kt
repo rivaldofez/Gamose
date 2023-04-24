@@ -1,5 +1,6 @@
 package com.rivaldofez.gamose.data
 
+import com.rivaldofez.gamose.model.DetailGame
 import com.rivaldofez.gamose.model.Game
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
@@ -84,6 +85,24 @@ class GameRepository {
                 games.add(it)
             }
         }
+    }
+
+    fun getDetailGame(gameId: Int): DetailGame {
+        return DetailGame(
+            title = "Gta 5",
+            id = 10,
+            description = "Lorem ipsum dolor sit amet",
+            shortDescription = "Lorem short",
+            thumbnail = "",
+            freetogameProfileUrl = "",
+            platform = "",
+            gameUrl = "",
+            releaseDate = "",
+            genre = "",
+            publisher = "",
+            developer = "",
+            status = "",
+        )
     }
 
     fun getAllGame(): Flow<List<Game>> {
