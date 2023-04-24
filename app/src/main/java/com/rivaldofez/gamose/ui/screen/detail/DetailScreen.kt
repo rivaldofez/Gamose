@@ -22,6 +22,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.rivaldofez.gamose.ui.common.UiState
@@ -32,7 +33,7 @@ import com.rivaldofez.gamose.ui.theme.GamoseTheme
 @Composable
 fun DetailScreen(
     gameId: Int,
-    viewModel: DetailViewModel = viewModel(modelClass = DetailViewModel::class.java),
+    viewModel: DetailViewModel = hiltViewModel(),
     navigateBack: () -> Unit,
 ) {
     viewModel.uiState.collectAsState(initial = UiState.Loading).value.let { uiState ->
@@ -43,14 +44,14 @@ fun DetailScreen(
             is UiState.Success -> {
                 val data = uiState.data
                 DetailContent(
-                    title = "Gta 5 San Andreas",
-                    thumbnail = "",
-                    releaseDate = "",
-                    genre = "Action",
-                    publisher = "",
-                    developer = "",
-                    platform = "",
-                    shortDescription = "",
+                    title = data.title,
+                    thumbnail = data.thumbnail,
+                    releaseDate = data.releaseDate,
+                    genre = data.genre,
+                    publisher = data.publisher,
+                    developer = data.developer,
+                    platform = data.platform,
+                    description = data.description,
                     onBackClick = navigateBack)
             }
 
@@ -68,7 +69,7 @@ fun DetailContent(
     publisher: String,
     developer: String,
     platform: String,
-    shortDescription: String,
+    description: String,
     onBackClick: () -> Unit,
     modifier: Modifier = Modifier
 ){
@@ -117,7 +118,7 @@ fun DetailContent(
                 )
 
                 Text(
-                    text = shortDescription,
+                    text = description,
                     style = MaterialTheme.typography.body2,
                     textAlign = TextAlign.Justify
                 )
@@ -138,7 +139,7 @@ fun DetailContentPreview() {
             publisher = "Rockstar",
             developer = "Gameloft",
             platform = "Windows",
-            shortDescription = "Lorem ipsum dolor sit amet",
+            description = "Lorem ipsum dolor sit amet",
             onBackClick = { }
         )
     }

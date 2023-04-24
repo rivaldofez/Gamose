@@ -23,7 +23,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
-    viewModel: HomeViewModel = hiltViewModel<HomeViewModel>(),
+    viewModel: HomeViewModel = hiltViewModel(),
     navigateToDetail: (Int) -> Unit,
 ) {
     viewModel.uiState.collectAsState(initial = UiState.Loading).value.let { uiState ->
