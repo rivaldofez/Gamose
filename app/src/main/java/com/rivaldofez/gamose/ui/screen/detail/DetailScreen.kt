@@ -1,6 +1,5 @@
 package com.rivaldofez.gamose.ui.screen
 
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -14,7 +13,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import com.rivaldofez.gamose.R
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -23,11 +21,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.rivaldofez.gamose.ui.common.UiState
 import com.rivaldofez.gamose.ui.screen.detail.DetailViewModel
-import com.rivaldofez.gamose.ui.screen.home.HomeViewModel
 import com.rivaldofez.gamose.ui.theme.GamoseTheme
 
 @Composable
@@ -36,10 +31,11 @@ fun DetailScreen(
     viewModel: DetailViewModel = hiltViewModel(),
     navigateBack: () -> Unit,
 ) {
-    viewModel.uiState.collectAsState(initial = UiState.Loading).value.let { uiState ->
+    viewModel.uiStateGameDetail.collectAsState(initial = UiState.Loading).value.let { uiState ->
         when (uiState){
             is UiState.Loading -> {
                 viewModel.getDetailGame(gameId = gameId)
+                viewModel.insertFavoriteGame(gameId = gameId, isFavorite = false)
             }
             is UiState.Success -> {
                 val data = uiState.data
