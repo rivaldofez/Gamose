@@ -1,5 +1,6 @@
 package com.rivaldofez.gamose
 
+import android.app.Application
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -25,6 +26,8 @@ import com.rivaldofez.gamose.ui.screen.FavoriteScreen
 import com.rivaldofez.gamose.ui.screen.HomeScreen
 import com.rivaldofez.gamose.ui.screen.ProfileScreen
 import com.rivaldofez.gamose.ui.theme.GamoseTheme
+import dagger.hilt.android.HiltAndroidApp
+
 
 @Composable
 fun GamoseApp(

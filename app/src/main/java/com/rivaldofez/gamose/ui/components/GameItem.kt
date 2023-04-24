@@ -14,6 +14,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.rememberImagePainter
 import com.rivaldofez.gamose.R
 import com.rivaldofez.gamose.ui.theme.GamoseTheme
 import com.rivaldofez.gamose.ui.theme.Shapes
@@ -45,7 +46,7 @@ fun GameItem(
         modifier = modifier
     ) {
         Image(
-            painter = painterResource(id = R.drawable.dummy),
+            painter = rememberImagePainter(data = image),
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier

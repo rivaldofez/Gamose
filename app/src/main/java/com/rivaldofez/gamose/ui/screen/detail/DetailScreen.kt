@@ -24,20 +24,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.rivaldofez.gamose.di.Injection
 import com.rivaldofez.gamose.ui.common.UiState
-import com.rivaldofez.gamose.ui.common.ViewModelFactory
 import com.rivaldofez.gamose.ui.screen.detail.DetailViewModel
+import com.rivaldofez.gamose.ui.screen.home.HomeViewModel
 import com.rivaldofez.gamose.ui.theme.GamoseTheme
 
 @Composable
 fun DetailScreen(
     gameId: Int,
-    viewModel: DetailViewModel = viewModel(
-        factory = ViewModelFactory(
-            Injection.provideRepository()
-        )
-    ),
+    viewModel: DetailViewModel = viewModel(modelClass = DetailViewModel::class.java),
     navigateBack: () -> Unit,
 ) {
     viewModel.uiState.collectAsState(initial = UiState.Loading).value.let { uiState ->

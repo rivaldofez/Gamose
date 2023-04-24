@@ -11,21 +11,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.rivaldofez.gamose.di.Injection
-import com.rivaldofez.gamose.model.Game
+import com.rivaldofez.gamose.domain.model.Game
 import com.rivaldofez.gamose.ui.common.UiState
-import com.rivaldofez.gamose.ui.common.ViewModelFactory
 import com.rivaldofez.gamose.ui.components.GameItem
 import com.rivaldofez.gamose.ui.screen.home.HomeViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
-    viewModel: HomeViewModel = viewModel(
-        factory = ViewModelFactory(Injection.provideRepository())
-    ),
+    viewModel: HomeViewModel = hiltViewModel<HomeViewModel>(),
     navigateToDetail: (Int) -> Unit,
 ) {
     viewModel.uiState.collectAsState(initial = UiState.Loading).value.let { uiState ->

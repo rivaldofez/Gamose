@@ -3,8 +3,8 @@ package com.rivaldofez.gamose.ui.screen.detail
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rivaldofez.gamose.data.GameRepository
-import com.rivaldofez.gamose.model.DetailGame
-import com.rivaldofez.gamose.model.Game
+import com.rivaldofez.gamose.domain.model.DetailGame
+import com.rivaldofez.gamose.domain.model.Game
 import com.rivaldofez.gamose.ui.common.UiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
