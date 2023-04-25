@@ -59,7 +59,7 @@ fun GamoseApp(
             }
 
             composable(Screen.Favorite.route) {
-                FavoriteScreen()
+                FavoriteScreen(navigateToDetail = {})
             }
 
             composable(Screen.Profile.route) {
