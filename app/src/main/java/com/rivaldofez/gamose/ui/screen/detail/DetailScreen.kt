@@ -21,6 +21,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import coil.compose.rememberImagePainter
 import com.rivaldofez.gamose.ui.common.UiState
 import com.rivaldofez.gamose.ui.screen.detail.DetailViewModel
 import com.rivaldofez.gamose.ui.theme.GamoseTheme
@@ -92,7 +93,7 @@ fun DetailContent(
     ) {
         Box {
             Image(
-                painter = painterResource(R.drawable.dummy),
+                painter = rememberImagePainter(data = thumbnail),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = modifier
@@ -127,7 +128,85 @@ fun DetailContent(
                 style = MaterialTheme.typography.subtitle1.copy(
                     fontWeight = FontWeight.ExtraBold
                 ),
-                color = MaterialTheme.colors.secondary
+                color = MaterialTheme.colors.secondary,
+                modifier = modifier.padding(bottom = 16.dp)
+            )
+
+            Text(
+                text = "Release Date :",
+                style = MaterialTheme.typography.body2.copy(
+                    fontWeight = FontWeight.Bold
+                ),
+                textAlign = TextAlign.Start,
+                modifier = modifier.fillMaxWidth()
+            )
+
+            Text(
+                text = releaseDate,
+                style = MaterialTheme.typography.body2,
+                textAlign = TextAlign.Start,
+                modifier = modifier.fillMaxWidth()
+                    .padding(bottom = 8.dp)
+            )
+
+            Text(
+                text = "Platform :",
+                style = MaterialTheme.typography.body2.copy(
+                    fontWeight = FontWeight.Bold
+                ),
+                textAlign = TextAlign.Justify,
+                modifier = modifier.fillMaxWidth()
+            )
+
+            Text(
+                text = platform,
+                style = MaterialTheme.typography.body2,
+                textAlign = TextAlign.Start,
+                modifier = modifier.fillMaxWidth()
+                    .padding(bottom = 8.dp)
+            )
+
+            Text(
+                text = "Publisher :",
+                style = MaterialTheme.typography.body2.copy(
+                    fontWeight = FontWeight.Bold
+                ),
+                textAlign = TextAlign.Justify,
+                modifier = modifier.fillMaxWidth()
+            )
+
+            Text(
+                text = publisher,
+                style = MaterialTheme.typography.body2,
+                textAlign = TextAlign.Start,
+                modifier = modifier.fillMaxWidth()
+                    .padding(bottom = 8.dp)
+            )
+
+            Text(
+                text = "Developer :",
+                style = MaterialTheme.typography.body2.copy(
+                    fontWeight = FontWeight.Bold
+                ),
+                textAlign = TextAlign.Justify,
+                modifier = modifier.fillMaxWidth()
+            )
+
+            Text(
+                text = developer,
+                style = MaterialTheme.typography.body2,
+                textAlign = TextAlign.Start,
+                modifier = modifier.fillMaxWidth()
+                    .padding(bottom = 8.dp)
+            )
+
+            Text(
+                text = "Description :",
+                style = MaterialTheme.typography.body2.copy(
+                    fontWeight = FontWeight.Bold
+                ),
+                textAlign = TextAlign.Justify,
+                modifier = modifier.fillMaxWidth()
             )
 
             Text(

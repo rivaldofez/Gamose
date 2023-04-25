@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
+import coil.compose.rememberImagePainter
 import com.rivaldofez.gamose.GamoseAppPreview
 import com.rivaldofez.gamose.R
 import com.rivaldofez.gamose.domain.model.GameDetail
@@ -74,7 +75,7 @@ fun GameFavoriteContent(
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             items(favoriteGames) {
-                GameFavoriteItem(image = it.thumbnail, title = it.title, genre = it.genre)
+                GameFavoriteItem(image = it.thumbnail, title = it.title, genre = it.genre, shortDescription = it.shortDescription)
                 Divider()
             }
         }
@@ -86,13 +87,14 @@ fun GameFavoriteItem(
     image: String,
     title: String,
     genre: String,
+    shortDescription: String,
     modifier: Modifier = Modifier,
 ) {
     Row(
         modifier = modifier.fillMaxWidth()
     ) {
         Image(
-            painter = painterResource(id = R.drawable.dummy),
+            painter = rememberImagePainter(data = image),
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier
@@ -119,6 +121,13 @@ fun GameFavoriteItem(
                 color = MaterialTheme.colors.secondary,
                 style = MaterialTheme.typography.subtitle2,
             )
+
+            Text(
+                text = shortDescription,
+                style = MaterialTheme.typography.body1,
+                overflow = TextOverflow.Ellipsis,
+                maxLines = 2
+            )
         }
     }
 }
@@ -127,6 +136,6 @@ fun GameFavoriteItem(
 @Preview(showBackground = true)
 fun GameFavoriteItem() {
     GamoseTheme {
-        GameFavoriteItem(image = "", title = "Hello", genre = "Action")
+        GameFavoriteItem(image = "", title = "Hello", genre = "Action", shortDescription = "Lorem ipsum dolor sit amet")
     }
 }
