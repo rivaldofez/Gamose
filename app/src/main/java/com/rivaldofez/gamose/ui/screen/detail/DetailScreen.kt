@@ -46,9 +46,9 @@ fun DetailScreen(
                         viewModel.insertFavoriteGame(gameDetail = data)
                     }) {
                         if (data.isFavorite){
-                            Icon(Icons.Filled.Favorite,"")
+                            Icon(painter = painterResource(id = R.drawable.ic_favorite_filled), contentDescription = null)
                         } else {
-                            Icon(Icons.Outlined.Favorite, contentDescription = "")
+                            Icon(painter = painterResource(id = R.drawable.ic_favorite_unfilled), contentDescription = null)
                         }
                     }
                 }) { innerPadding ->
@@ -106,7 +106,7 @@ fun DetailContent(
                 contentDescription = "Back Button",
                 modifier = Modifier
                     .padding(16.dp)
-                    .clickable { onBackClick }
+                    .clickable { onBackClick() }
             )
         }
         Column(
@@ -145,7 +145,8 @@ fun DetailContent(
                 text = releaseDate,
                 style = MaterialTheme.typography.body2,
                 textAlign = TextAlign.Start,
-                modifier = modifier.fillMaxWidth()
+                modifier = modifier
+                    .fillMaxWidth()
                     .padding(bottom = 8.dp)
             )
 
@@ -162,7 +163,8 @@ fun DetailContent(
                 text = platform,
                 style = MaterialTheme.typography.body2,
                 textAlign = TextAlign.Start,
-                modifier = modifier.fillMaxWidth()
+                modifier = modifier
+                    .fillMaxWidth()
                     .padding(bottom = 8.dp)
             )
 
@@ -179,7 +181,8 @@ fun DetailContent(
                 text = publisher,
                 style = MaterialTheme.typography.body2,
                 textAlign = TextAlign.Start,
-                modifier = modifier.fillMaxWidth()
+                modifier = modifier
+                    .fillMaxWidth()
                     .padding(bottom = 8.dp)
             )
 
@@ -196,7 +199,8 @@ fun DetailContent(
                 text = developer,
                 style = MaterialTheme.typography.body2,
                 textAlign = TextAlign.Start,
-                modifier = modifier.fillMaxWidth()
+                modifier = modifier
+                    .fillMaxWidth()
                     .padding(bottom = 8.dp)
             )
 

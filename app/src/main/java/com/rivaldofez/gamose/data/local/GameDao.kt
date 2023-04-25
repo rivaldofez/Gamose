@@ -15,6 +15,6 @@ interface GameDao {
     @Query("SELECT * FROM game_detail WHERE id = :gameId LIMIT 1")
     fun getFavoriteGameById(gameId: Int) : Flow<GameDetailEntity?>
 
-    @Query("SELECT * FROM game_detail")
+    @Query("SELECT * FROM game_detail WHERE isFavorite = 1")
     fun getFavoriteGames(): Flow<List<GameDetailEntity>>
 }

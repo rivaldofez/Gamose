@@ -59,7 +59,9 @@ fun GamoseApp(
             }
 
             composable(Screen.Favorite.route) {
-                FavoriteScreen(navigateToDetail = {})
+                FavoriteScreen(navigateToDetail = { gameId ->
+                    navController.navigate(Screen.DetailGame.createRoute(gameId))
+                })
             }
 
             composable(Screen.Profile.route) {

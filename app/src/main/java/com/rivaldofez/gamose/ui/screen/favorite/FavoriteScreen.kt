@@ -1,6 +1,7 @@
 package com.rivaldofez.gamose.ui.screen
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -75,7 +76,9 @@ fun GameFavoriteContent(
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             items(favoriteGames) {
-                GameFavoriteItem(image = it.thumbnail, title = it.title, genre = it.genre, shortDescription = it.shortDescription)
+                GameFavoriteItem(image = it.thumbnail, title = it.title, genre = it.genre, shortDescription = it.shortDescription, modifier = Modifier.clickable {
+                    navigateToDetail(it.id)
+                })
                 Divider()
             }
         }
