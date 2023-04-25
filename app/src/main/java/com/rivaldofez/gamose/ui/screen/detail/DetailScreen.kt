@@ -135,6 +135,10 @@ fun DetailContent(
                 modifier = Modifier
                     .padding(16.dp)
                     .clickable { onBackClick() }
+                    .clip(RoundedCornerShape(size = 8.dp))
+                    .background(color = Color.White)
+                    .padding(8.dp)
+
             )
         }
         Column(
