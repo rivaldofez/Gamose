@@ -1,4 +1,4 @@
-package com.rivaldofez.gamose.ui.screen
+package com.rivaldofez.gamose.ui.screen.detail
 
 import android.content.Context
 import android.widget.Toast
@@ -8,11 +8,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
-import androidx.compose.material.icons.outlined.Favorite
-import androidx.compose.material.icons.outlined.Person
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -28,11 +25,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberImagePainter
 import com.rivaldofez.gamose.ui.common.UiState
-import com.rivaldofez.gamose.ui.screen.detail.DetailViewModel
+import com.rivaldofez.gamose.ui.components.ErrorContent
 import com.rivaldofez.gamose.ui.theme.GamoseTheme
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.launch
 
 @Composable
 fun DetailScreen(
@@ -42,16 +36,13 @@ fun DetailScreen(
 ) {
     val context = LocalContext.current
 
-
-
-
     viewModel.uiStateGameDetail.collectAsState(initial = UiState.Loading).value.let { uiState ->
         when (uiState){
             is UiState.Loading -> {
                 viewModel.getDetailGame(gameId = gameId)
             }
             is UiState.Success -> {
-                var data = uiState.data
+                val data = uiState.data
                 Scaffold (
                     floatingActionButton = {
                     FloatingActionButton(onClick = {
@@ -95,7 +86,9 @@ fun DetailScreen(
 
             }
 
-            is UiState.Error -> {}
+            is UiState.Error -> {
+                ErrorContent(message = "There is error occured, please try again", image = R.drawable.error)
+            }
         }
     }
 }

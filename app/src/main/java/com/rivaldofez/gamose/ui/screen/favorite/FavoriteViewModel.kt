@@ -3,7 +3,6 @@ package com.rivaldofez.gamose.ui.screen.favorite
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rivaldofez.gamose.data.GameRepository
-import com.rivaldofez.gamose.domain.model.Game
 import com.rivaldofez.gamose.domain.model.GameDetail
 import com.rivaldofez.gamose.ui.common.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,13 +20,20 @@ class FavoriteViewModel @Inject constructor(private val gameRepository: GameRepo
     fun getFavoriteGames() {
         viewModelScope.launch {
             _uiState.value = UiState.Loading
-            gameRepository.getFavoriteGames()
-                .catch {
-                    _uiState.value = UiState.Error(it.message.toString())
-                }
-                .collect {
-                    _uiState.value = UiState.Success(it)
-                }
+
+            try {
+                gameRepository.getFavoriteGames()
+                    .catch {
+                        _uiState.value = UiState.Error(it.message.toString())
+                    }
+                    .collect {
+                        _uiState.value = UiState.Success(it)
+                    }
+            } catch (e: Exception){
+                _uiState.value = UiState.Error(e.message.toString())
+            }
+
+
         }
     }
 }

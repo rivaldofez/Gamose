@@ -23,10 +23,6 @@ data class GameDetailEntity(
     var isFavorite: Boolean
 )
 
-//fun GameDetail.toGameDetailEntity() = GameDetailEntity(
-//    id, shortDescription, thumbnail, freetogameProfileUrl, description, title, platform, gameUrl, releaseDate, genre, publisher, developer, status, isFavorite
-//)
-
 fun GameDetail.toGameDetailEntity() = GameDetailEntity(
     id, shortDescription, thumbnail, freetogameProfileUrl, description, title, platform, gameUrl, releaseDate, genre, publisher, developer, status, isFavorite
 )

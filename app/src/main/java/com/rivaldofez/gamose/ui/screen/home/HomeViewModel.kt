@@ -15,21 +15,20 @@ class HomeViewModel @Inject constructor( private val gameRepository: GameReposit
     private val _uiState: MutableStateFlow<UiState<List<Game>>> = MutableStateFlow(UiState.Loading)
     val uiState: StateFlow<UiState<List<Game>>> get() = _uiState
 
-    init {
-        getGames()
-    }
-
-
     fun getGames() {
         viewModelScope.launch {
             _uiState.value = UiState.Loading
-            gameRepository.getAllGame()
-                .catch {
-                    _uiState.value = UiState.Error(it.message.toString())
-                }
-                .collect {
-                    _uiState.value = UiState.Success(it)
-                }
+            try {
+                gameRepository.getAllGame()
+                    .catch {
+                        _uiState.value = UiState.Error(it.message.toString())
+                    }
+                    .collect {
+                        _uiState.value = UiState.Success(it)
+                    }
+            } catch (e: Exception){
+                _uiState.value = UiState.Error(e.message.toString())
+            }
         }
     }
 }

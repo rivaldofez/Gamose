@@ -1,7 +1,5 @@
 package com.rivaldofez.gamose
 
-import android.app.Application
-import android.util.Log
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -20,12 +18,11 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.rivaldofez.gamose.ui.navigation.NavigationItem
 import com.rivaldofez.gamose.ui.navigation.Screen
-import com.rivaldofez.gamose.ui.screen.DetailScreen
-import com.rivaldofez.gamose.ui.screen.FavoriteScreen
-import com.rivaldofez.gamose.ui.screen.HomeScreen
+import com.rivaldofez.gamose.ui.screen.detail.DetailScreen
+import com.rivaldofez.gamose.ui.screen.favorite.FavoriteScreen
+import com.rivaldofez.gamose.ui.screen.home.HomeScreen
 import com.rivaldofez.gamose.ui.screen.ProfileScreen
 import com.rivaldofez.gamose.ui.theme.GamoseTheme
-import dagger.hilt.android.HiltAndroidApp
 
 
 @Composable

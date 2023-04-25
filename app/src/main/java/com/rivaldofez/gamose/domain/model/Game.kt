@@ -1,7 +1,6 @@
 package com.rivaldofez.gamose.domain.model
 
 import com.rivaldofez.gamose.data.remote.model.GameItemResponse
-import com.rivaldofez.gamose.ui.components.GameItem
 
 data class Game(
 

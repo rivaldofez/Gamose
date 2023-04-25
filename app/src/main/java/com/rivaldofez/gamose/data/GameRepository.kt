@@ -22,7 +22,7 @@ class GameRepository @Inject constructor(
     }
 
     suspend fun getGameDetail(gameId: Int): Flow<GameDetail?>{
-        return flowOf(gameService.getGameDetail(gameId)?.toGameDetail() ?: null)
+        return flowOf(gameService.getGameDetail(gameId)?.toGameDetail())
     }
 
     fun getFavoriteGameById(gameId: Int): Flow<GameDetail?>{

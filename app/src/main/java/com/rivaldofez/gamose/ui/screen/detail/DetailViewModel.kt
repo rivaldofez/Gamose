@@ -22,9 +22,7 @@ class DetailViewModel @Inject constructor(
 
     fun getDetailGame(gameId: Int) {
 
-
         viewModelScope.launch {
-
             gameRepository.getFavoriteGameById(gameId = gameId)
                 .catch {
                     _uiStateGameDetail.value = UiState.Error(it.message.toString())
