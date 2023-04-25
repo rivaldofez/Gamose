@@ -5,9 +5,7 @@ import android.util.Log
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -103,12 +101,12 @@ private fun BottomBar(
             ),
             NavigationItem(
                 title = "Favorite",
-                icon = Icons.Default.Search,
+                icon = Icons.Default.Favorite,
                 screen = Screen.Favorite
             ),
             NavigationItem(
                 title = "Profile",
-                icon = Icons.Default.AccountCircle,
+                icon = Icons.Default.Person,
                 screen = Screen.Profile
             )
         )

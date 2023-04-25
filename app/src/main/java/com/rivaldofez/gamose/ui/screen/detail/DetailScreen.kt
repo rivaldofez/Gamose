@@ -1,5 +1,7 @@
 package com.rivaldofez.gamose.ui.screen
 
+import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -10,12 +12,14 @@ import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import com.rivaldofez.gamose.R
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -26,7 +30,9 @@ import coil.compose.rememberImagePainter
 import com.rivaldofez.gamose.ui.common.UiState
 import com.rivaldofez.gamose.ui.screen.detail.DetailViewModel
 import com.rivaldofez.gamose.ui.theme.GamoseTheme
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.launch
 
 @Composable
 fun DetailScreen(
@@ -34,6 +40,11 @@ fun DetailScreen(
     viewModel: DetailViewModel = hiltViewModel(),
     navigateBack: () -> Unit,
 ) {
+    val context = LocalContext.current
+
+
+
+
     viewModel.uiStateGameDetail.collectAsState(initial = UiState.Loading).value.let { uiState ->
         when (uiState){
             is UiState.Loading -> {
@@ -41,10 +52,22 @@ fun DetailScreen(
             }
             is UiState.Success -> {
                 var data = uiState.data
-                Scaffold (floatingActionButton = {
+                Scaffold (
+                    floatingActionButton = {
                     FloatingActionButton(onClick = {
                         data.isFavorite = !data.isFavorite
                         viewModel.insertFavoriteGame(gameDetail = data)
+                        if (data.isFavorite) {
+                            showSnackBar(
+                                context = context,
+                                message = "Added to favorite list"
+                            )
+                        } else {
+                            showSnackBar(
+                                context = context,
+                                message = "Removed from favorite list"
+                            )
+                        }
                     }) {
                         if (data.isFavorite){
                             Icon(painter = painterResource(id = R.drawable.ic_favorite_filled), contentDescription = null, tint = Color.White)
@@ -52,7 +75,9 @@ fun DetailScreen(
                             Icon(painter = painterResource(id = R.drawable.ic_favorite_unfilled), contentDescription = null, tint = Color.White)
                         }
                     }
-                }) { innerPadding ->
+                },
+                    modifier = Modifier.fillMaxSize()
+                ) { innerPadding ->
                     DetailContent(
                         title = data.title,
                         thumbnail = data.thumbnail,
@@ -73,6 +98,14 @@ fun DetailScreen(
             is UiState.Error -> {}
         }
     }
+}
+
+private fun showSnackBar(context: Context, message: String){
+    Toast.makeText(
+        context,
+        message,
+        Toast.LENGTH_SHORT
+    ).show()
 }
 
 @Composable
