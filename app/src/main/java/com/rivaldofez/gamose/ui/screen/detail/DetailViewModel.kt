@@ -17,42 +17,44 @@ import javax.inject.Inject
 class DetailViewModel @Inject constructor(
     private val gameRepository: GameRepository
     ) : ViewModel() {
-    private var _uiStateGameDetail: MutableStateFlow<UiState<GameDetail>> = MutableStateFlow(UiState.Loading)
-    val uiStateGameDetail: StateFlow<UiState<GameDetail>> get() = _uiStateGameDetail
+    private var _uiState: MutableStateFlow<UiState<GameDetail>> = MutableStateFlow(UiState.Loading)
+    val uiState: StateFlow<UiState<GameDetail>> get() = _uiState
 
     fun getDetailGame(gameId: Int) {
-
-        viewModelScope.launch {
-            gameRepository.getFavoriteGameById(gameId = gameId)
-                .catch {
-                    _uiStateGameDetail.value = UiState.Error(it.message.toString())
-                }
-                .collect { gameDetailDb ->
-                    if(gameDetailDb == null){
-                        gameRepository.getGameDetail(gameId = gameId)
-                            .catch {
-                                _uiStateGameDetail.value = UiState.Error(it.message.toString())
-                            }
-                            .collect { gameDetailRm ->
-                                if(gameDetailRm == null){
-                                    _uiStateGameDetail.value = UiState.Error("Found null values")
-                                } else {
-                                    _uiStateGameDetail.value = UiState.Success(gameDetailRm)
-                                    gameRepository.insertFavoriteGame(gameDetailRm)
-                                }
-                            }
-                    } else {
-                        _uiStateGameDetail.value = UiState.Success(gameDetailDb)
-                        Log.d("Bacot", gameDetailDb.toString())
+        try {
+            viewModelScope.launch {
+                gameRepository.getFavoriteGameById(gameId = gameId)
+                    .catch {
+                        _uiState.value = UiState.Error(it.message.toString())
                     }
-                }
+                    .collect { gameDetailDb ->
+                        if(gameDetailDb == null){
+                            gameRepository.getGameDetail(gameId = gameId)
+                                .catch {
+                                    _uiState.value = UiState.Error(it.message.toString())
+                                }
+                                .collect { gameDetailRm ->
+                                    if(gameDetailRm == null){
+                                        _uiState.value = UiState.Error("Found null values")
+                                    } else {
+                                        _uiState.value = UiState.Success(gameDetailRm)
+                                        gameRepository.insertFavoriteGame(gameDetailRm)
+                                    }
+                                }
+                        } else {
+                            _uiState.value = UiState.Success(gameDetailDb)
+                            Log.d("Bacot", gameDetailDb.toString())
+                        }
+                    }
+            }
+        } catch (e: Exception){
+            _uiState.value = UiState.Error(e.message.toString())
         }
     }
 
     fun insertFavoriteGame(gameDetail: GameDetail){
-//        _uiStateGameDetail.value = UiState.Loading
         viewModelScope.launch {
-            _uiStateGameDetail.value = UiState.Loading
+            _uiState.value = UiState.Loading
             gameRepository.insertFavoriteGame(gameDetail = gameDetail)
         }
     }

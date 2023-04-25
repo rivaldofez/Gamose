@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Gamose</string>
+    <string name="error_no_data">There is No Data</string>
+    <string name="error_exception">There is error occured, please try again</string>
+    <string name="explore_games">Explore Games</string>
+    <string name="cd_back_button">Back Button</string>
+    <string name="release_date">Release Date :</string>
+    <string name="platform">Platform :</string>
+    <string name="publisher">Publisher :</string>
+    <string name="developer">Developer :</string>
+    <string name="description">Description :</string>
+    <string name="added_to_favorite">Added to favorite list</string>
+    <string name="removed_from_favorite">Removed from favorite list</string>
 </resources>

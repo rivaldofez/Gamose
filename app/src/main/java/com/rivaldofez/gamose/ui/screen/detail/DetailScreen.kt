@@ -18,6 +18,7 @@ import com.rivaldofez.gamose.R
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -36,7 +37,7 @@ fun DetailScreen(
 ) {
     val context = LocalContext.current
 
-    viewModel.uiStateGameDetail.collectAsState(initial = UiState.Loading).value.let { uiState ->
+    viewModel.uiState.collectAsState(initial = UiState.Loading).value.let { uiState ->
         when (uiState){
             is UiState.Loading -> {
                 viewModel.getDetailGame(gameId = gameId)
@@ -49,14 +50,14 @@ fun DetailScreen(
                         data.isFavorite = !data.isFavorite
                         viewModel.insertFavoriteGame(gameDetail = data)
                         if (data.isFavorite) {
-                            showSnackBar(
+                            showToast(
                                 context = context,
-                                message = "Added to favorite list"
+                                message = R.string.added_to_favorite
                             )
                         } else {
-                            showSnackBar(
+                            showToast(
                                 context = context,
-                                message = "Removed from favorite list"
+                                message = R.string.removed_from_favorite
                             )
                         }
                     }) {
@@ -87,13 +88,13 @@ fun DetailScreen(
             }
 
             is UiState.Error -> {
-                ErrorContent(message = "There is error occured, please try again", image = R.drawable.error)
+                ErrorContent(message = stringResource(R.string.error_exception), image = R.drawable.error)
             }
         }
     }
 }
 
-private fun showSnackBar(context: Context, message: String){
+private fun showToast(context: Context, message: Int){
     Toast.makeText(
         context,
         message,
@@ -130,7 +131,7 @@ fun DetailContent(
             )
             Icon(
                 imageVector = Icons.Default.ArrowBack,
-                contentDescription = "Back Button",
+                contentDescription = stringResource(R.string.cd_back_button),
                 modifier = Modifier
                     .padding(16.dp)
                     .clickable { onBackClick() }
@@ -160,7 +161,7 @@ fun DetailContent(
             )
 
             Text(
-                text = "Release Date :",
+                text = stringResource(R.string.release_date),
                 style = MaterialTheme.typography.body2.copy(
                     fontWeight = FontWeight.Bold
                 ),
@@ -178,7 +179,7 @@ fun DetailContent(
             )
 
             Text(
-                text = "Platform :",
+                text = stringResource(R.string.platform),
                 style = MaterialTheme.typography.body2.copy(
                     fontWeight = FontWeight.Bold
                 ),
@@ -196,7 +197,7 @@ fun DetailContent(
             )
 
             Text(
-                text = "Publisher :",
+                text = stringResource(R.string.publisher),
                 style = MaterialTheme.typography.body2.copy(
                     fontWeight = FontWeight.Bold
                 ),
@@ -214,7 +215,7 @@ fun DetailContent(
             )
 
             Text(
-                text = "Developer :",
+                text = stringResource(R.string.developer),
                 style = MaterialTheme.typography.body2.copy(
                     fontWeight = FontWeight.Bold
                 ),
@@ -232,7 +233,7 @@ fun DetailContent(
             )
 
             Text(
-                text = "Description :",
+                text = stringResource(R.string.description),
                 style = MaterialTheme.typography.body2.copy(
                     fontWeight = FontWeight.Bold
                 ),

@@ -1,14 +1,10 @@
 package com.rivaldofez.gamose.ui.screen.home
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
@@ -16,12 +12,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -44,14 +37,14 @@ fun HomeScreen(
             }
             is UiState.Success -> {
                 if ( uiState.data.isEmpty() ) {
-                    ErrorContent(message = "There is No Data", image = R.drawable.empty)
+                    ErrorContent(message = stringResource(R.string.error_no_data), image = R.drawable.empty)
                 } else {
                     HomeContent(games = uiState.data, modifier = modifier, navigateToDetail = navigateToDetail)
                 }
             }
             
             is UiState.Error -> {
-                ErrorContent(message = "There is error occured, please try again", image = R.drawable.error)
+                ErrorContent(message = stringResource(R.string.error_exception), image = R.drawable.error)
             }
         }
     }
@@ -73,7 +66,7 @@ fun HomeContent(
     ) {
         TopAppBar(backgroundColor = MaterialTheme.colors.surface) {
             Text(
-                text = "Explore Games",
+                text = stringResource(R.string.explore_games),
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 12.dp),

@@ -14,6 +14,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -42,13 +43,13 @@ fun FavoriteScreen(
             }
             is UiState.Success -> {
                 if (uiState.data.isEmpty()){
-                    ErrorContent(message = "There is No Data", image = R.drawable.empty)
+                    ErrorContent(message = stringResource(R.string.error_no_data), image = R.drawable.empty)
                 } else {
                     GameFavoriteContent(favoriteGames = uiState.data, navigateToDetail = navigateToDetail, modifier = modifier)
                 }
             }
             is UiState.Error -> {
-                ErrorContent(message = "There is error occured, please try again", image = R.drawable.error)
+                ErrorContent(message = stringResource(R.string.error_exception), image = R.drawable.error)
             }
         }
     }
