@@ -13,6 +13,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import com.rivaldofez.gamose.R
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -46,9 +47,9 @@ fun DetailScreen(
                         viewModel.insertFavoriteGame(gameDetail = data)
                     }) {
                         if (data.isFavorite){
-                            Icon(painter = painterResource(id = R.drawable.ic_favorite_filled), contentDescription = null)
+                            Icon(painter = painterResource(id = R.drawable.ic_favorite_filled), contentDescription = null, tint = Color.White)
                         } else {
-                            Icon(painter = painterResource(id = R.drawable.ic_favorite_unfilled), contentDescription = null)
+                            Icon(painter = painterResource(id = R.drawable.ic_favorite_unfilled), contentDescription = null, tint = Color.White)
                         }
                     }
                 }) { innerPadding ->
