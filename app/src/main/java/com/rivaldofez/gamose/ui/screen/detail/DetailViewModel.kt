@@ -10,7 +10,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -26,7 +25,7 @@ class DetailViewModel @Inject constructor(
 
         viewModelScope.launch {
 
-            gameRepository.getFavoriteGame(gameId = gameId)
+            gameRepository.getFavoriteGameById(gameId = gameId)
                 .catch {
                     _uiStateGameDetail.value = UiState.Error(it.message.toString())
                 }
@@ -53,10 +52,10 @@ class DetailViewModel @Inject constructor(
     }
 
     fun insertFavoriteGame(gameDetail: GameDetail){
-        _uiStateGameDetail.value = UiState.Loading
+//        _uiStateGameDetail.value = UiState.Loading
         viewModelScope.launch {
+            _uiStateGameDetail.value = UiState.Loading
             gameRepository.insertFavoriteGame(gameDetail = gameDetail)
-            getDetailGame(gameDetail.id)
         }
     }
 }

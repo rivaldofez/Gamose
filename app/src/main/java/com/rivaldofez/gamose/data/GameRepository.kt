@@ -1,7 +1,6 @@
 package com.rivaldofez.gamose.data
 
 import com.rivaldofez.gamose.data.local.GameDatabase
-import com.rivaldofez.gamose.data.local.model.GameDetailEntity
 import com.rivaldofez.gamose.data.local.model.toGameDetailEntity
 import com.rivaldofez.gamose.data.remote.GameService
 import com.rivaldofez.gamose.domain.model.*
@@ -26,9 +25,17 @@ class GameRepository @Inject constructor(
         return flowOf(gameService.getGameDetail(gameId)?.toGameDetail() ?: null)
     }
 
-    fun getFavoriteGame(gameId: Int): Flow<GameDetail?>{
-        return gameDatabase.gameDao().getFavoriteGame(gameId = gameId).map {
+    fun getFavoriteGameById(gameId: Int): Flow<GameDetail?>{
+        return gameDatabase.gameDao().getFavoriteGameById(gameId = gameId).map {
             it?.toGameDetail()
+        }
+    }
+
+    fun getFavoriteGames(): Flow<List<GameDetail>>{
+        return gameDatabase.gameDao().getFavoriteGames().map { listGameEntity ->
+            listGameEntity.map {
+                it.toGameDetail()
+            }
         }
     }
 
