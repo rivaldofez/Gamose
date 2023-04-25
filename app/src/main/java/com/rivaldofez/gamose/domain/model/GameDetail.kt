@@ -1,5 +1,6 @@
 package com.rivaldofez.gamose.domain.model
 
+import com.rivaldofez.gamose.data.local.model.GameDetailEntity
 import com.rivaldofez.gamose.data.remote.model.GameDetailResponse
 import com.rivaldofez.gamose.data.remote.model.GameItemResponse
 import com.rivaldofez.gamose.ui.components.GameItem
@@ -17,9 +18,14 @@ data class GameDetail(
     val publisher: String,
     val developer: String,
     val id: Int,
-    val status: String
+    val status: String,
+    var isFavorite: Boolean = false
 )
 
 fun GameDetailResponse.toGameDetail() = GameDetail(
     shortDescription, thumbnail, freetogameProfileUrl, description, title, platform, gameUrl, releaseDate, genre, publisher, developer, id, status
+)
+
+fun GameDetailEntity.toGameDetail() = GameDetail(
+    shortDescription, thumbnail, freetogameProfileUrl, description, title, platform, gameUrl, releaseDate, genre, publisher, developer, id, status, isFavorite
 )

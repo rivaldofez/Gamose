@@ -1,6 +1,7 @@
 package com.rivaldofez.gamose
 
 import android.app.Application
+import android.util.Log
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -44,7 +45,7 @@ fun GamoseApp(
                 BottomBar(navController)
             }
         },
-        modifier = modifier
+        modifier = modifier,
     ) { innerPadding ->
         NavHost(
             navController = navController,
