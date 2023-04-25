@@ -1,16 +1,20 @@
 package com.rivaldofez.gamose.ui.screen
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -46,17 +50,32 @@ fun HomeContent(
     modifier: Modifier = Modifier,
     navigateToDetail: (Int) -> Unit
 ) {
-    LazyVerticalGrid(
-        columns = GridCells.Adaptive(160.dp),
-        contentPadding = PaddingValues(16.dp),
-        horizontalArrangement = Arrangement.spacedBy(16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp),
-        modifier = modifier
+
+    Column(
+        modifier = modifier.fillMaxSize()
     ) {
-        items(games) {
-            GameItem(image = it.thumbnail, title = it.title, genre = it.genre, modifier = Modifier.clickable{
-                navigateToDetail(it.id)
-            })
+        TopAppBar(backgroundColor = MaterialTheme.colors.surface) {
+            Text(
+                text = "Explore Games",
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp),
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp,
+                textAlign = TextAlign.Center
+            )
+        }
+
+        LazyVerticalGrid(
+            columns = GridCells.Adaptive(160.dp),
+            contentPadding = PaddingValues(16.dp),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            modifier = modifier
+        ) {
+            items(games) {
+                GameItem(image = it.thumbnail, title = it.title, genre = it.genre, modifier = Modifier.clickable{
+                    navigateToDetail(it.id)
+                })
+            }
         }
     }
 }

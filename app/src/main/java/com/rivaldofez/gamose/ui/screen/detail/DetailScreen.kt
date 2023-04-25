@@ -5,9 +5,9 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.outlined.Favorite
+import androidx.compose.material.icons.outlined.Person
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
@@ -45,9 +45,9 @@ fun DetailScreen(
                         viewModel.insertFavoriteGame(gameDetail = data)
                     }) {
                         if (data.isFavorite){
-                            Icon(Icons.Filled.Add,"")
+                            Icon(Icons.Filled.Favorite,"")
                         } else {
-                            Icon(Icons.Filled.Delete, contentDescription = "")
+                            Icon(Icons.Outlined.Favorite, contentDescription = "")
                         }
                     }
                 }) { innerPadding ->

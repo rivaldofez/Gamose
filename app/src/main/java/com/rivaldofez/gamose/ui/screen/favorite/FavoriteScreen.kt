@@ -56,13 +56,27 @@ fun GameFavoriteContent(
     modifier: Modifier = Modifier,
     navigateToDetail: (Int) -> Unit
 ){
-    LazyColumn(
-        contentPadding = PaddingValues(16.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp),
+    Column(
+        modifier = modifier.fillMaxSize()
     ) {
-        items(favoriteGames) {
-            GameFavoriteItem(image = it.thumbnail, title = it.title, genre = it.genre)
-            Divider()
+        TopAppBar(backgroundColor = MaterialTheme.colors.surface) {
+            Text(
+                text = "Fevorite Games",
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp),
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp,
+                textAlign = TextAlign.Center
+            )
+        }
+
+        LazyColumn(
+            contentPadding = PaddingValues(16.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+            items(favoriteGames) {
+                GameFavoriteItem(image = it.thumbnail, title = it.title, genre = it.genre)
+                Divider()
+            }
         }
     }
 }
