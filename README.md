@@ -49,16 +49,8 @@
     <img src="images/image_1.png" width="150" /> 
     <img src="images/image_2.png" width="150" />
     <img src="images/image_3.png" width="150" />
-    <img src="images/image_4.png" width="150" />
-    <img src="images/image_5.png" width="150" />
 </p>
-<p align="middle">
-    <img src="images/image_6.png" width="150" />
-    <img src="images/image_7.png" width="150" />
-    <img src="images/image_8.png" width="150" />
-    <img src="images/image_9.png" width="150" />
-    <img src="images/image_10.png" width="150" />
-</p>
+
 
 Gamose is a consumer apps that provide feature see latest and popular game and pin it as your favorite games
 
